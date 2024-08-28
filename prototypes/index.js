@@ -64,7 +64,7 @@ const kittyPrompts = {
     // add 2 to each of the ages of the kitty objects (map)
 
     this.sortByAge(animalData)
-    console.log(animalData)
+
     const olderAnimals = animalData.map((animal) => {
       return {
         name: animal.name,
@@ -78,27 +78,12 @@ const kittyPrompts = {
 
 // Annotation: This was a little more complicated. What I initially returned was just the modified ages. I needed to return each element and show that it was in an object in order for it to match the desired result.
 
-// PLEASE READ-----------------------
-// Currently, your functions are probably using the `kitties` global import variable.
-// refactor the above functions using arguments and parameters so that
-// they can perform the same utility
-// for the kitties or puppers datasets, depending on what arguments you send through.
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
 
 // DATASET: clubs from ./datasets/clubs
+
+
 const clubPrompts = {
-  membersBelongingToClubs() {
+  membersBelongingToClubs(clubsData) {
     // Your function should access the clubs data through a parameter (it is being passed as an argument in the test file)
     // Create an object whose keys are the names of people, and whose values are
     // arrays that include the names of the clubs that person is a part of. e.g.
@@ -108,45 +93,47 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    /* CODE GOES HERE */
-
-    // Annotation:
-    // Write your annotation here as a comment
+    //psuedocode: (reduce)
+    // get every unique name
+    // assign every unique name as an key with value of every club they are in in an array
+    // create a new array of objects
+    const membersClubs = clubsData.reduce((acc, club) => {
+      club.members.forEach(member => {
+        if (!acc[member]) {
+          acc[member] = []
+        }
+        acc[member].push(club.club);
+      });
+      return acc
+    }, {});
+    return membersClubs
   }
-};
-
-
-
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
+}
+    //1. needed to start with reduce as we were accumulating clubs for each member
+    //2. then I needed to find each unique member with the if statement on 117 
+    //3. then if the member did not exist then create the array to hold the clubs
+    //4. then for each member that has an array - push in the clubs they were in
+    //
+    //
 
 // DATASET: mods from ./datasets/mods
+
 const modPrompts = {
   studentsPerMod() {
+    const modWithRatio = mods.map((mod) => {
+      return {
+        mod: mod.mod,
+        studentsPerInstructor: mod.students / mod.instructors,
+      };
+    });
+    return modWithRatio;
+
     // Return an array of objects where the keys are mod (the number of the module)
-    // and studentsPerInstructor (how many students per instructor there are for that mod) e.g.
-    // [
-    //   { mod: 1, studentsPerInstructor: 9 },
-    //   { mod: 2, studentsPerInstructor: 11 },
-    //   { mod: 3, studentsPerInstructor: 10 },
-    //   { mod: 4, studentsPerInstructor: 8 }
-    // ]
+    // and studentsPerInstructor (how many students per instructor there are for that mod) e.g. 
 
-    /* CODE GOES HERE */
+    // Annotation: This one was different because there was no parameter being passed in. Instead the 'mods' variable was made/transferred at the top of the page with the 'require'
 
-    // Annotation:
-    // Write your annotation here as a comment
+    // I also learned that the MAP method can completely change what is inside an object in an array
   }
 };
 
