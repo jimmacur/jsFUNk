@@ -20,56 +20,63 @@ const { dinosaurs, humans, movies } = require('./datasets/dinosaurs');
 
 // DATASET: kitties from ./datasets/kitties
 const kittyPrompts = {
-  orangePetNames(kittyData) {
+  orangePetNames(animalData) {
     // Return an array of just the names of kitties who are orange e.g.
         // ['Tiger', 'Snickers']
 
-        /* CODE GOES HERE */
-      // find all the cats that are orange (filter)
+      // psuedo code: find all the cats that are orange (filter)
         // will return cat objects
       // return ann array of the names (map)
-    const orangeKitties = kittyData.filter((cat) =>{
-      return cat.color === 'orange';
+    const orangeAnimals = animalData.filter((animal) =>{
+      return animal.color === 'orange';
     });
 
-    const orangeKittyNames = orangeKitties.map((cat) => {
-      return cat.name;
+    const orangeAnimalNames = orangeAnimals.map((animal) => {
+      return animal.name;
     });
-
-    console.log(orangeKittyNames)
-    return orangeKittyNames
+    return orangeAnimalNames
   
-
-    // Annotation:
-    // Write your annotation here as a comment
+    // Annotation: Pseudo code first. Think about which iterator(s) you will use
+    // use console log to see how each const or function is working through each iteration
   },
 
-  sortByAge() {
+  sortByAge(animalData) {
     // Sort the kitties by their age
 
     /* CODE GOES HERE */
 
-    // Annotation:
-    // Write your annotation here as a comment
+    const animalsByAge = animalData.sort((a, b) => {
+      return b.age - a.age;
+    });
+    return animalsByAge
+
+    // psuedo code: sort all cats by their age - oldest to youngest (sort)
+    // return an array of cat objects - same size list as before 
+
+    // Annotation: Nice work with pseudo code. This one was simple as it only needed one iterator method
+
   },
 
-  growUp() {
+  growUp(animalData) {
     // Return an array of kitties who have all grown up by 2 years e.g.
-    // [{
-    //   name: 'Felicia',
-    //   age: 4,
-    //   color: 'grey'
-    // },
-    // {
-    //   name: 'Tiger',
-    //   age: 7,
-    //   color: 'orange'
-    // },
-    // ...etc]
 
-    /* CODE GOES HERE */
+    //pseudocode: Take the kittiesByAge from above
+    // add 2 to each of the ages of the kitty objects (map)
+
+    this.sortByAge(animalData)
+    console.log(animalData)
+    const olderAnimals = animalData.map((animal) => {
+      return {
+        name: animal.name,
+        age: animal.age + 2,
+        color: animal.color,
+      };
+    });
+    return olderAnimals
   }
 };
+
+// Annotation: This was a little more complicated. What I initially returned was just the modified ages. I needed to return each element and show that it was in an object in order for it to match the desired result.
 
 // PLEASE READ-----------------------
 // Currently, your functions are probably using the `kitties` global import variable.
