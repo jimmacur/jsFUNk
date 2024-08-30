@@ -139,20 +139,6 @@ const modPrompts = {
 
 
 
-
-
-
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-// ---------------------------------------------------------------------------
-
-
-
-
-
-
 // DATASET: cakes from ./datasets/cakes
 const cakePrompts = {
   stockPerCake() {
@@ -163,38 +149,27 @@ const cakePrompts = {
     //    { flavor: 'yellow', inStock: 14 },
     //    ..etc
     // ]
-
+    const flavorAndStock = cakes.map((cake) => {
+      return {
+        flavor: cake.cakeFlavor,
+        inStock: cake.inStock,
+      }
+    });
+    return flavorAndStock
+  },
+  
     /* CODE GOES HERE */
 
-    // Annotation:
-    // Write your annotation here as a comment
-  },
+    // Annotation: This one was pretty straight forward. I wasted a lot of time because I got an extra curly brace that made the rest of the functions mal-function. I actually solved it on my own, took a little walk, and did the dishes. It helped. Test then passed.
+  
 
   onlyInStock() {
     // Return an array of only the cakes that are in stock
-    // e.g.
-    // [
-    //   {
-    //   cakeFlavor: 'dark chocolate',
-    //   filling: null,
-    //   frosting: 'dark chocolate ganache',
-    //   toppings: ['dutch process cocoa', 'toasted sugar', 'smoked sea salt'],
-    //   inStock: 15
-    // },
-    // {
-    //   cakeFlavor: 'yellow',
-    //   filling: 'citrus glaze',
-    //   frosting: 'chantilly cream',
-    //   toppings: ['berries', 'edible flowers'],
-    //   inStock: 14
-    // },
-    // ..etc
-    // ]
 
-    /* CODE GOES HERE */
+    // filter out anything with instock at 0
+    // filter in anything with instock > 0
 
     // Annotation:
-    // Write your annotation here as a comment
   },
 
   totalInventory() {
